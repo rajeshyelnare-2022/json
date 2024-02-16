@@ -1,0 +1,17 @@
+package com.yelnare.rajesh;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ObjectNode;
+public class App 
+{
+    public static void main( String[] args ) throws Exception
+    {
+    	 String jsonString = "{\"name\":\"raj\", \"age\":\"30\", \"address\":\"Madhapur\"},"
+    	 		+ "{\\\"name\\\":\\\"app\\\", \\\"age\\\":\\\"30\\\", \\\"address\\\":\\\"Madhapur\\\"}";
+         ObjectMapper mapper = new ObjectMapper();
+         ObjectNode node = mapper.readValue(jsonString, ObjectNode.class);
+         if(node.has("name")) {
+            System.out.println("NAME: " + node.get("name"));
+         }
+    }
+}
