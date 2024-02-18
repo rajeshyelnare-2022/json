@@ -1,0 +1,45 @@
+package com.yelnare.rajesh;
+
+import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
+import java.util.List;
+
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.impl.client.HttpClientBuilder;
+import org.apache.http.message.BasicNameValuePair;
+import org.apache.http.util.EntityUtils;
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
+import org.apache.http.NameValuePair;
+
+public class PostTest {
+
+	public static void main(String[] args) throws Exception {
+	//	
+		
+		//HttpClient client = new HttpClient();
+	
+		// Create an instance of HttpClient
+		 HttpClient httpClient = HttpClientBuilder.create().build();
+		 HttpPost post = new HttpPost("https://httpbin.org/post");
+		  @SuppressWarnings("unchecked")
+		List<NameValuePair> urlParameters = new ArrayList<NameValuePair>();
+	        urlParameters.add(new BasicNameValuePair("username", "abc"));
+	        urlParameters.add(new BasicNameValuePair("password", "123"));
+	        urlParameters.add(new BasicNameValuePair("custom", "secret"));
+
+	        post.setEntity(new UrlEncodedFormEntity(urlParameters));
+	        
+	        HttpResponse httpResponse = httpClient.execute(post);
+
+	     // Extract the response's content
+	     HttpEntity responseEntity = httpResponse.getEntity();
+	     String response = EntityUtils.toString(responseEntity);
+
+	     // Print the response
+	     System.out.println(response);
+	}
+
+}
